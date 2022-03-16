@@ -10,8 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.lab49.assignment.taptosnap.R
 import com.lab49.assignment.taptosnap.base.BaseFragment
 import com.lab49.assignment.taptosnap.databinding.FragmentSplashBinding
-import com.lab49.assignment.taptosnap.util.Resource
-import com.lab49.assignment.taptosnap.util.clickWithDebounce
+import com.lab49.assignment.taptosnap.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -34,17 +33,30 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                         }
                         is Resource.Failure -> {
                             hideProgress()
+                            sharedVM.postMessage(event.throwable.getMessageForUi())
                         }
                         is Resource.Success -> {
-                            hideProgress()
-                            findNavController().navigate(R.id.action_splash_fragment_to_main_fragment)
+                            sharedVM.cacheResponse(event.result)
+                            if (!sharedVM.isItemsAvailable()) {
+                                sharedVM.postMessage(getString(R.string.no_item_found))
+                            } else {
+                                hideProgress()
+                                findNavController().navigate(R.id.action_splash_fragment_to_main_fragment)
+                            }
                         }
                     }
                 }
         }
+        binding.btnLetsGo.clickWithDebounce { sharedVM.getItems() }
+    }
 
-        binding.button.clickWithDebounce {
-            sharedVM.getItems()
-        }
+    override fun showProgress() {
+        super.showProgress()
+        binding.progressBar.visible()
+    }
+
+    override fun hideProgress() {
+        super.hideProgress()
+        binding.progressBar.gone()
     }
 }

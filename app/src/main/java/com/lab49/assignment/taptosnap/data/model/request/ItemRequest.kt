@@ -1,4 +1,4 @@
-package com.lab49.assignment.taptosnap.data.model
+package com.lab49.assignment.taptosnap.data.model.request
 
 import androidx.annotation.Keep
 

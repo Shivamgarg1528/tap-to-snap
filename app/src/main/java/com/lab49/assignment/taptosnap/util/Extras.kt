@@ -4,6 +4,7 @@ import android.os.SystemClock
 import android.view.View
 import androidx.annotation.Keep
 
+
 @Keep
 sealed class Resource<in T> {
     class Loading<T> : Resource<T>()
@@ -21,4 +22,23 @@ fun View.clickWithDebounce(debounceTime: Long = 600L, action: () -> Unit) {
             lastClickTime = SystemClock.elapsedRealtime()
         }
     })
+}
+
+internal fun Throwable.getMessageForUi(): String {
+    if (this is NoConnectionInterceptor.NoConnectivityException) {
+        return message
+    }
+    return "Something went wrong!"
+}
+
+fun View.visible() {
+    if (visibility != View.VISIBLE) {
+        visibility = View.VISIBLE
+    }
+}
+
+fun View.gone() {
+    if (visibility != View.GONE) {
+        visibility = View.GONE
+    }
 }

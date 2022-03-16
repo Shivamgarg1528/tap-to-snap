@@ -8,6 +8,7 @@
     <color name="red">#FF4545</color>
     <color name="bg_gray">#302236</color>
     <color name="bg_gray_dark">#271C2B</color>
+    <color name="bg_gray_dark_70">#B3271C2B</color>
     <color name="tile_gray">#584D5D</color>
     <color name="tile_gray_dark">#473C4D</color>
     <color name="white">#ffffff</color>

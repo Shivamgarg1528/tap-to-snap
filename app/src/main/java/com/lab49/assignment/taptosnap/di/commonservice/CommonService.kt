@@ -5,14 +5,14 @@ import com.lab49.assignment.taptosnap.data.repo.SnapRepoImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 abstract class CommonService {
 
-    @Singleton
+    @ViewModelScoped
     @Binds
     abstract fun provideSnapRepo(snapRepoImpl: SnapRepoImpl): SnapRepo
 }

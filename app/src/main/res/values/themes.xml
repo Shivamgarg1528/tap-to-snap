@@ -1,4 +1,9 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.TapToSnap" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <style name="Theme.TapToSnap" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="fontFamily">@font/font_family</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>

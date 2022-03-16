@@ -1,8 +1,8 @@
-package com.lab49.assignment.taptosnap.data.model
+package com.lab49.assignment.taptosnap.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
-class ItemsList : ArrayList<ItemsList.ItemsResponseItem>() {
+class ItemsListResponse : ArrayList<ItemsListResponse.ItemsResponseItem>() {
 
     data class ItemsResponseItem(
         @SerializedName("id")

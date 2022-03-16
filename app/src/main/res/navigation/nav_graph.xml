@@ -19,5 +19,11 @@
     <fragment
         android:id="@+id/main_fragment"
         android:name="com.lab49.assignment.taptosnap.features.main.ui.MainFragment"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_main_fragment_to_splash_fragment"
+            app:destination="@id/splash_fragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
