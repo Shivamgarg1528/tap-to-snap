@@ -37,7 +37,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                         }
                         is Resource.Success -> {
                             sharedVM.cacheResponse(event.result)
-                            if (!sharedVM.isItemsAvailable()) {
+                            if (!sharedVM.areItemsAvailable()) {
                                 sharedVM.postMessage(getString(R.string.no_item_found))
                             } else {
                                 hideProgress()

@@ -1,5 +1,7 @@
 package com.lab49.assignment.taptosnap.base
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,4 +43,25 @@ abstract class BaseFragment<T : ViewBinding>(id: Int) : Fragment(id) {
     protected open fun showProgress() {}
 
     protected open fun hideProgress() {}
+
+    fun showAlert(
+        context: Context,
+        title: String,
+        message: String,
+        positiveBtnText: String,
+        negativeBtnText: String? = null,
+        positiveBtnAction: (() -> Unit)? = null,
+        negativeBtnAction: (() -> Unit)? = null
+    ) {
+        val builder = AlertDialog.Builder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton(positiveBtnText) { _, _ -> positiveBtnAction?.invoke() }
+
+        if (negativeBtnText.isNullOrEmpty().not()) {
+            builder.setNegativeButton(negativeBtnText.toString()) { _, _ -> negativeBtnAction?.invoke() }
+        }
+        builder.show().setCanceledOnTouchOutside(false)
+    }
 }

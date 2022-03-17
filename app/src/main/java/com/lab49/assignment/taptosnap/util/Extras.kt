@@ -1,14 +1,19 @@
 package com.lab49.assignment.taptosnap.util
 
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.os.SystemClock
 import android.util.Base64
 import android.view.View
 import androidx.annotation.Keep
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import java.io.ByteArrayOutputStream
+import kotlin.coroutines.coroutineContext
 
 
 const val SWW = "Something went wrong!"
+const val FTG = "Failed to get image!"
 
 @Keep
 sealed class Resource<in T> {
@@ -52,5 +57,18 @@ fun Bitmap.toBase64String(): String {
     ByteArrayOutputStream().apply {
         compress(Bitmap.CompressFormat.JPEG, 100, this)
         return Base64.encodeToString(toByteArray(), Base64.DEFAULT)
+    }
+}
+
+val Int.toDp: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
+
+suspend fun repeat1(
+    delayMillis: Long = 1000,
+    block: suspend () -> Unit,
+) {
+    while (coroutineContext.isActive) {
+        block()
+        delay(delayMillis)
     }
 }

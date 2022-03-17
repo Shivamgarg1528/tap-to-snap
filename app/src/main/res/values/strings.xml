@@ -3,22 +3,13 @@
     <string name="tap_to_snap">Tap to snap</string>
     <string name="tap_to_try_again">Tap to try again</string>
     <string name="lets_go">LET’S GO!</string>
-    <string name="right">Right</string>
-    <string name="left">Left</string>
-    <string name="description">Description</string>
-    <string name="title">Title</string>
-    <string name="error">Error</string>
-    <string name="ok">OK</string>
     <string name="retry">Retry</string>
     <string name="nice_job">Nice Job!</string>
-    <string name="game_over">Game Over!</string>
     <string name="game_won">Congratulations!! You\'ve won the game!</string>
-    <string name="ran_out_of_time">You\'ve run out of time!</string>
+    <string name="game_over">Game Over!</string>
+    <string name="better_luck">Better luck next time!</string>
     <string name="restart">Restart</string>
     <string name="exit">Exit</string>
-    <string name="time_format">00:%s</string>
-    <string name="time_zero">00:00:00</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="no_item_found">No Item Found</string>
+    <string name="no_item_found">No Items Found</string>
 </resources>
