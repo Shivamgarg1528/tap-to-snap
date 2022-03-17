@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/lets_go_button_selector.xml" value="0.172" />
+        <entry key="app/src/main/res/drawable/state_success.xml" value="0.2175" />
         <entry key="app/src/main/res/drawable/tile_bg_failed.xml" value="0.172" />
         <entry key="app/src/main/res/drawable/tile_bg_loading.xml" value="0.11750640869140624" />
         <entry key="app/src/main/res/drawable/tile_bg_success.xml" value="0.172" />
