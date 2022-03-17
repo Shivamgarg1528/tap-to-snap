@@ -1,6 +1,5 @@
 package com.lab49.assignment.taptosnap.features.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
@@ -43,7 +42,6 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
 
     class ViewHolder(private var binding: RowItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ItemWrapper) {
-            Log.d("TAG", "bind() called with: item = $item")
             binding.tvImageName.text = item.item.name
             binding.ivCaptured.setImageBitmap(item.bitmap)
             when (item.state) {
@@ -70,14 +68,14 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
         }
 
         private fun running() {
-            applyColor(R.color.gradient_btm, R.color.bg_gray_dark_70)
+            applyColor(R.color.gradient_btm)
             binding.tvTryAgain.gone()
             binding.progressBar.visible()
             binding.ivCamera.gone()
         }
 
         private fun failed() {
-            applyColor(R.color.red, R.color.bg_gray_dark_70)
+            applyColor(R.color.red)
             binding.tvTryAgain.visible()
             binding.progressBar.gone()
             binding.ivCamera.gone()
@@ -90,19 +88,15 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
             binding.ivCamera.gone()
         }
 
-        private fun applyColor(
-            @ColorRes stroke: Int,
-            @ColorRes bg: Int = android.R.color.transparent,
-        ) {
+        private fun applyColor(@ColorRes stroke: Int) {
             val context = binding.parent.context
             binding.parent.apply {
                 strokeColor = ContextCompat.getColor(context, stroke)
-                //setCardBackgroundColor(ContextCompat.getColor(context, bg))
             }
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ItemWrapper>() {
+    private companion object DiffCallback : DiffUtil.ItemCallback<ItemWrapper>() {
         override fun areItemsTheSame(oldItem: ItemWrapper, newItem: ItemWrapper): Boolean {
             return oldItem === newItem
         }
