@@ -6,14 +6,8 @@ import android.os.SystemClock
 import android.util.Base64
 import android.view.View
 import androidx.annotation.Keep
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
+import com.lab49.assignment.taptosnap.util.Constants.SWW
 import java.io.ByteArrayOutputStream
-import kotlin.coroutines.coroutineContext
-
-
-const val SWW = "Something went wrong!"
-const val FTG = "Failed to get image!"
 
 @Keep
 sealed class Resource<in T> {
@@ -62,13 +56,3 @@ fun Bitmap.toBase64String(): String {
 
 val Int.toDp: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
-
-suspend fun repeat1(
-    delayMillis: Long = 1000,
-    block: suspend () -> Unit,
-) {
-    while (coroutineContext.isActive) {
-        block()
-        delay(delayMillis)
-    }
-}

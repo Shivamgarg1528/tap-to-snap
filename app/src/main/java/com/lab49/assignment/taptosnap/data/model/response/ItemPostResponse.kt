@@ -1,6 +1,10 @@
 package com.lab49.assignment.taptosnap.data.model.response
 
-import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
-@Keep
-data class ItemPostResponse(val matched: Boolean, val imageLabel: String)
+data class ItemPostResponse(
+    @SerializedName("matched")
+    val matched: Boolean,
+    @SerializedName("imageLabel")
+    val imageLabel: String,
+)

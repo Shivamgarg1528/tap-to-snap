@@ -1,4 +1,4 @@
-package com.lab49.assignment.taptosnap.features
+package com.lab49.assignment.taptosnap
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel

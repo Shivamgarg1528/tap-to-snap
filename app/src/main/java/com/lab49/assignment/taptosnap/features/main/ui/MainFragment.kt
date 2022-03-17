@@ -16,10 +16,10 @@ import com.lab49.assignment.taptosnap.R
 import com.lab49.assignment.taptosnap.base.BaseFragment
 import com.lab49.assignment.taptosnap.data.model.request.ItemRequest
 import com.lab49.assignment.taptosnap.databinding.FragmentMainBinding
-import com.lab49.assignment.taptosnap.features.SharedViewModel
+import com.lab49.assignment.taptosnap.SharedViewModel
 import com.lab49.assignment.taptosnap.features.main.adapter.ItemsAdapter
-import com.lab49.assignment.taptosnap.util.FTG
-import com.lab49.assignment.taptosnap.util.SWW
+import com.lab49.assignment.taptosnap.util.Constants.FTG
+import com.lab49.assignment.taptosnap.util.Constants.SWW
 import com.lab49.assignment.taptosnap.util.toBase64String
 import com.lab49.assignment.taptosnap.util.toDp
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
-    private lateinit var pictureLauncher: ActivityResultLauncher<Void>
+    private lateinit var pictureLauncher: ActivityResultLauncher<Void?>
 
     override fun getViewBinding(inflater: LayoutInflater): FragmentMainBinding {
         return FragmentMainBinding.inflate(inflater)
