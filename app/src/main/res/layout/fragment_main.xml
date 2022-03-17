@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_gray"
@@ -30,8 +31,8 @@
         android:layout_height="83dp"
         android:background="@color/bg_gray_dark"
         android:gravity="center"
-        android:text="00:00:00"
         android:textColor="@color/white"
-        android:textSize="48sp" />
+        android:textSize="48sp"
+        tools:text="00:00:00" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -95,7 +95,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                         is SharedViewModel.Event.Timer -> {
                             binding.tvTimer.text = it.time
                         }
-                        SharedViewModel.Event.Loose -> {
+                        SharedViewModel.Event.Lost -> {
                             showAlert(context = requireContext(),
                                 title = getString(R.string.game_over),
                                 message = getString(R.string.better_luck),
@@ -121,5 +121,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
         //3- start timer
         sharedVM.startTimer()
+        //4- post data
+        sharedVM.postItemsOnUi()
     }
 }

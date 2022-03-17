@@ -36,7 +36,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                             sharedVM.postMessage(event.throwable.getMessageForUi())
                         }
                         is Resource.Success -> {
-                            sharedVM.cacheResponse(event.result)
+                            sharedVM.cachedItems(event.result)
                             if (!sharedVM.areItemsAvailable()) {
                                 sharedVM.postMessage(getString(R.string.no_item_found))
                             } else {

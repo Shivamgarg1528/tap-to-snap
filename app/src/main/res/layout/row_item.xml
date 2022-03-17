@@ -5,7 +5,7 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="13dp"
+    app:cardCornerRadius="14dp"
     app:strokeWidth="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,18 +40,24 @@
             app:layout_constraintVertical_bias="1.0"
             tools:text="Mug" />
 
-        <ProgressBar
+        <FrameLayout
             android:id="@+id/progress_bar"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:indeterminateTint="@color/white"
-            android:indeterminateTintMode="src_in"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/bg_gray_dark_70"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/tv_image_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/white"
+                android:indeterminateTintMode="src_in" />
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_try_again"

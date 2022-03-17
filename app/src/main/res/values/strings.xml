@@ -6,7 +6,7 @@
     <string name="nice_job">Nice Job!</string>
     <string name="game_won">Congratulations!! You\'ve won the game!</string>
     <string name="game_over">Game Over!</string>
-    <string name="better_luck">Better luck next time!</string>
+    <string name="better_luck">You\'ve run out of time, Better luck next time!!</string>
     <string name="restart">Restart</string>
     <string name="exit">Exit</string>
     <string name="no_item_found">No Items Found</string>
