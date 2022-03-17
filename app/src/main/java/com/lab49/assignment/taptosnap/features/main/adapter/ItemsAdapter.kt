@@ -2,8 +2,6 @@ package com.lab49.assignment.taptosnap.features.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -61,38 +59,31 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
         }
 
         private fun notStarted() {
-            applyColor(R.color.gradient_btm)
+            binding.parent.setBackgroundResource(R.drawable.state_loading)
             binding.tvTryAgain.gone()
             binding.progressBar.gone()
             binding.ivCamera.visible()
         }
 
         private fun running() {
-            applyColor(R.color.gradient_btm)
+            binding.parent.setBackgroundResource(R.drawable.state_loading)
             binding.tvTryAgain.gone()
             binding.progressBar.visible()
             binding.ivCamera.gone()
         }
 
         private fun failed() {
-            applyColor(R.color.red)
+            binding.parent.setBackgroundResource(R.drawable.state_failed)
             binding.tvTryAgain.visible()
             binding.progressBar.gone()
             binding.ivCamera.gone()
         }
 
         private fun success() {
-            applyColor(R.color.green)
+            binding.parent.setBackgroundResource(R.drawable.state_success)
             binding.tvTryAgain.gone()
             binding.progressBar.gone()
             binding.ivCamera.gone()
-        }
-
-        private fun applyColor(@ColorRes stroke: Int) {
-            val context = binding.parent.context
-            binding.parent.apply {
-                strokeColor = ContextCompat.getColor(context, stroke)
-            }
         }
     }
 

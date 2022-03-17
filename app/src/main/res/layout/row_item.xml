@@ -1,93 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/bg_gray"
-    app:cardCornerRadius="14dp"
-    app:strokeWidth="3dp">
+    android:background="@drawable/state_success">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_3"
+        app:cardBackgroundColor="@color/tile_gray"
+        app:cardCornerRadius="@dimen/dp_14">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_captured"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:background="@color/tile_gray"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@id/tv_image_name"
-            app:layout_constraintDimensionRatio="H,160:209"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_image_name"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:background="@color/tile_gray_dark"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:text="Mug" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_captured"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_210"
+                android:background="@color/tile_gray"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@id/tv_image_name"
+                app:layout_constraintDimensionRatio="H,160:209"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-            android:id="@+id/progress_bar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/bg_gray_dark_70"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/tv_image_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_image_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_54"
+                android:background="@color/tile_gray_dark"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_24"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="Mug" />
 
-            <ProgressBar
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/white"
-                android:indeterminateTintMode="src_in" />
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/progress_bar"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_0"
+                android:background="@color/bg_gray_dark_70"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/tv_image_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_try_again"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/bg_gray_dark_70"
-            android:gravity="center"
-            android:text="@string/tap_to_try_again"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/tv_image_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+                <ProgressBar
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_25"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/white"
+                    android:indeterminateTintMode="src_in" />
+            </FrameLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/tv_image_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/tile_camera"
-            tools:visibility="visible" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_try_again"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_0"
+                android:background="@color/bg_gray_dark_70"
+                android:gravity="center"
+                android:text="@string/tap_to_try_again"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/tv_image_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/tv_image_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/tile_camera"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
