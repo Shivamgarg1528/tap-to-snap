@@ -15,4 +15,8 @@ object Constants {
         const val FAILED = 2
         const val SUCCESS = 3
     }
+
+    object KEY {
+        const val ITEMS = "key_items"
+    }
 }

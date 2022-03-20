@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-
 @HiltViewModel
 class SharedViewModel @Inject constructor(private val snapRepo: SnapRepo) : ViewModel() {
     private var timerJob: Job? = null

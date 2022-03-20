@@ -2,6 +2,8 @@ package com.lab49.assignment.taptosnap.features.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,9 +11,6 @@ import com.lab49.assignment.taptosnap.R
 import com.lab49.assignment.taptosnap.data.model.request.local.ItemWrapper
 import com.lab49.assignment.taptosnap.databinding.RowItemBinding
 import com.lab49.assignment.taptosnap.util.Constants
-import com.lab49.assignment.taptosnap.util.gone
-import com.lab49.assignment.taptosnap.util.visible
-
 
 class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
     ListAdapter<ItemWrapper, ItemsAdapter.ViewHolder>(DiffCallback) {
@@ -23,16 +22,12 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bindItem = getItem(position)
         holder.bind(bindItem)
-        if (bindItem.isImageSaved()) {
-            holder.itemView.setOnClickListener(null)
-        } else {
-            holder.itemView.setOnClickListener {
-                val adapterPosition = holder.adapterPosition
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    val tappedItem = getItem(adapterPosition)
-                    if (tappedItem.canTap()) {
-                        callback.invoke(tappedItem)
-                    }
+        holder.itemView.setOnClickListener {
+            val adapterPosition = holder.adapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                val tappedItem = getItem(adapterPosition)
+                if (tappedItem.canTap()) {
+                    callback.invoke(tappedItem)
                 }
             }
         }
@@ -60,30 +55,30 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
 
         private fun notStarted() {
             binding.parent.setBackgroundResource(R.drawable.state_loading)
-            binding.tvTryAgain.gone()
-            binding.progressBar.gone()
-            binding.ivCamera.visible()
+            binding.tvTryAgain.isGone = true
+            binding.progressBar.isGone = true
+            binding.ivCamera.isVisible = true
         }
 
         private fun running() {
             binding.parent.setBackgroundResource(R.drawable.state_loading)
-            binding.tvTryAgain.gone()
-            binding.progressBar.visible()
-            binding.ivCamera.gone()
+            binding.tvTryAgain.isGone = true
+            binding.progressBar.isVisible = true
+            binding.ivCamera.isGone = true
         }
 
         private fun failed() {
             binding.parent.setBackgroundResource(R.drawable.state_failed)
-            binding.tvTryAgain.visible()
-            binding.progressBar.gone()
-            binding.ivCamera.gone()
+            binding.tvTryAgain.isVisible = true
+            binding.progressBar.isGone = true
+            binding.ivCamera.isGone = true
         }
 
         private fun success() {
             binding.parent.setBackgroundResource(R.drawable.state_success)
-            binding.tvTryAgain.gone()
-            binding.progressBar.gone()
-            binding.ivCamera.gone()
+            binding.tvTryAgain.isGone = true
+            binding.progressBar.isGone = true
+            binding.ivCamera.isGone = true
         }
     }
 

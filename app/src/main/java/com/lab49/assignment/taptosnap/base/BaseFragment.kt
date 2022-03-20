@@ -40,10 +40,6 @@ abstract class BaseFragment<T : ViewBinding>(id: Int) : Fragment(id) {
         _binding = null
     }
 
-    protected open fun showProgress() {}
-
-    protected open fun hideProgress() {}
-
     fun showAlert(
         context: Context,
         title: String,

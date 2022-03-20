@@ -2,9 +2,7 @@ package com.lab49.assignment.taptosnap.util
 
 import android.content.res.Resources
 import android.graphics.Bitmap
-import android.os.SystemClock
 import android.util.Base64
-import android.view.View
 import androidx.annotation.Keep
 import com.lab49.assignment.taptosnap.util.Constants.SWW
 import java.io.ByteArrayOutputStream
@@ -16,35 +14,11 @@ sealed class Resource<in T> {
     class Failure<T>(val throwable: Throwable) : Resource<T>()
 }
 
-fun View.clickWithDebounce(debounceTime: Long = 600L, action: () -> Unit) {
-    this.setOnClickListener(object : View.OnClickListener {
-        private var lastClickTime: Long = 0
-
-        override fun onClick(v: View) {
-            if (SystemClock.elapsedRealtime() - lastClickTime < debounceTime) return
-            else action()
-            lastClickTime = SystemClock.elapsedRealtime()
-        }
-    })
-}
-
 internal fun Throwable.getMessageForUi(): String {
     if (this is NoConnectionInterceptor.NoConnectivityException) {
         return message
     }
     return SWW
-}
-
-fun View.visible() {
-    if (visibility != View.VISIBLE) {
-        visibility = View.VISIBLE
-    }
-}
-
-fun View.gone() {
-    if (visibility != View.GONE) {
-        visibility = View.GONE
-    }
 }
 
 fun Bitmap.toBase64String(): String {

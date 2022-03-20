@@ -3,6 +3,10 @@ package com.lab49.assignment.taptosnap.features.splash.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -10,7 +14,9 @@ import androidx.navigation.fragment.findNavController
 import com.lab49.assignment.taptosnap.R
 import com.lab49.assignment.taptosnap.base.BaseFragment
 import com.lab49.assignment.taptosnap.databinding.FragmentSplashBinding
-import com.lab49.assignment.taptosnap.util.*
+import com.lab49.assignment.taptosnap.features.splash.vm.SplashViewModel
+import com.lab49.assignment.taptosnap.util.Constants
+import com.lab49.assignment.taptosnap.util.getMessageForUi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,45 +24,44 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
 
+    private val splashVM by viewModels<SplashViewModel>()
+
     override fun getViewBinding(inflater: LayoutInflater) = FragmentSplashBinding.inflate(inflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val owner = viewLifecycleOwner
-        owner.lifecycleScope.launch {
-            sharedVM.itemsListEvent
-                .flowWithLifecycle(owner.lifecycle, Lifecycle.State.STARTED)
-                .collect { event ->
-                    when (event) {
-                        is Resource.Loading -> {
-                            showProgress()
+        //1- setup click listener
+        binding.btnLetsGo.setOnClickListener { splashVM.getItems() }
+
+        //2- observe events
+        viewLifecycleOwner.lifecycleScope.launch {
+            splashVM.events
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                    when (it) {
+                        SplashViewModel.Events.Empty -> {
+                            // No-OP
                         }
-                        is Resource.Failure -> {
-                            hideProgress()
-                            sharedVM.postMessage(event.throwable.getMessageForUi())
+                        SplashViewModel.Events.Loading -> {
+                            binding.progressBar.isVisible = true
                         }
-                        is Resource.Success -> {
-                            sharedVM.cachedItems(event.result)
-                            if (!sharedVM.areItemsAvailable()) {
-                                sharedVM.postMessage(getString(R.string.no_item_found))
-                            } else {
-                                hideProgress()
-                                findNavController().navigate(R.id.action_splash_fragment_to_main_fragment)
-                            }
+                        SplashViewModel.Events.NoItemsFound -> {
+                            binding.progressBar.isGone = true
+                            sharedVM.postMessage(getString(R.string.no_item_found))
+                        }
+                        is SplashViewModel.Events.Failed -> {
+                            binding.progressBar.isGone = true
+                            sharedVM.postMessage(it.exception.getMessageForUi())
+                        }
+                        is SplashViewModel.Events.Success -> {
+                            binding.progressBar.isGone = true
+                            findNavController().navigate(
+                                resId = R.id.action_splash_fragment_to_main_fragment,
+                                args = bundleOf(Constants.KEY.ITEMS to it.items)
+                            )
                         }
                     }
                 }
         }
-        binding.btnLetsGo.clickWithDebounce { sharedVM.getItems() }
-    }
-
-    override fun showProgress() {
-        super.showProgress()
-        binding.progressBar.visible()
-    }
-
-    override fun hideProgress() {
-        super.hideProgress()
-        binding.progressBar.gone()
     }
 }
