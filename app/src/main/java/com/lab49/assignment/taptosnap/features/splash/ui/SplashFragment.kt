@@ -18,7 +18,6 @@ import com.lab49.assignment.taptosnap.features.splash.vm.SplashViewModel
 import com.lab49.assignment.taptosnap.util.Constants
 import com.lab49.assignment.taptosnap.util.getMessageForUi
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -39,21 +38,21 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                 .collect {
                     when (it) {
-                        SplashViewModel.Events.NoOperation -> {
+                        SplashViewModel.Event.NoOperation -> {
                             // No-OP
                         }
-                        SplashViewModel.Events.Loading -> {
+                        SplashViewModel.Event.Loading -> {
                             binding.progressBar.isVisible = true
                         }
-                        SplashViewModel.Events.Empty -> {
+                        SplashViewModel.Event.Empty -> {
                             binding.progressBar.isGone = true
                             sharedVM.postMessage(getString(R.string.no_item_found))
                         }
-                        is SplashViewModel.Events.Failed -> {
+                        is SplashViewModel.Event.Failed -> {
                             binding.progressBar.isGone = true
                             sharedVM.postMessage(it.exception.getMessageForUi())
                         }
-                        is SplashViewModel.Events.Success -> {
+                        is SplashViewModel.Event.Success -> {
                             binding.progressBar.isGone = true
                             findNavController().navigate(
                                 resId = R.id.action_splash_fragment_to_main_fragment,

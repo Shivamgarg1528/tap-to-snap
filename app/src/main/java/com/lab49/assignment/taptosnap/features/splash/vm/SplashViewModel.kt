@@ -20,7 +20,7 @@ class SplashViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var items: String = savedStateHandle.get<String>(Constants.KEY.ITEMS).orEmpty()
-    private val _events = MutableStateFlow<Events>(Events.NoOperation)
+    private val _events = MutableStateFlow<Event>(Event.NoOperation)
     val events = _events.asStateFlow()
 
     /**
@@ -29,37 +29,37 @@ class SplashViewModel @Inject constructor(
      */
     fun getItems() {
         if (items.isNotEmpty()) {
-            _events.value = Events.Success(items = items)
+            _events.value = Event.Success(items = items)
             return
         }
         snapRepo.getItems().onEach { eachEvent ->
             when (eachEvent) {
                 is Resource.Loading -> {
-                    _events.value = Events.Loading
+                    _events.value = Event.Loading
                 }
                 is Resource.Success -> {
                     if (eachEvent.result.isEmpty()) {
-                        _events.value = Events.Empty
+                        _events.value = Event.Empty
                     } else {
                         eachEvent.result.joinToString { it.name }.also {
                             items = it
                             savedStateHandle.set(Constants.KEY.ITEMS, items)
-                            _events.value = Events.Success(items = items)
+                            _events.value = Event.Success(items = items)
                         }
                     }
                 }
                 is Resource.Failure -> {
-                    _events.value = Events.Failed(eachEvent.throwable)
+                    _events.value = Event.Failed(eachEvent.throwable)
                 }
             }
         }.launchIn(viewModelScope)
     }
 
-    sealed class Events {
-        object NoOperation : Events()
-        object Empty : Events()
-        object Loading : Events()
-        data class Failed(val exception: Throwable) : Events()
-        data class Success(val items: String) : Events()
+    sealed class Event {
+        object NoOperation : Event()
+        object Empty : Event()
+        object Loading : Event()
+        data class Failed(val exception: Throwable) : Event()
+        data class Success(val items: String) : Event()
     }
 }
