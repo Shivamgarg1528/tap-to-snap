@@ -35,7 +35,7 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
 
     class ViewHolder(private var binding: RowItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ItemWrapper) {
-            binding.tvImageName.text = item.item.name
+            binding.tvImageName.text = item.itemName
             binding.ivCaptured.setImageBitmap(item.bitmap)
             when (item.state) {
                 Constants.STATE.NOT_STARTED -> {

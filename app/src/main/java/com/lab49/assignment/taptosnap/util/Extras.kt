@@ -6,6 +6,7 @@ import android.util.Base64
 import androidx.annotation.Keep
 import com.lab49.assignment.taptosnap.util.Constants.SWW
 import java.io.ByteArrayOutputStream
+import java.util.concurrent.TimeUnit
 
 @Keep
 sealed class Resource<in T> {
@@ -30,3 +31,16 @@ fun Bitmap.toBase64String(): String {
 
 val Int.toDp: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
+
+/**
+ * Convert seconds to date ui format
+ *
+ * @param seconds
+ * @return
+ */
+fun convertSecondsToDateUiFormat(seconds: Long): String {
+    val hour = TimeUnit.SECONDS.toHours(seconds) % 24
+    val minute = TimeUnit.SECONDS.toMinutes(seconds) % 60
+    val second = TimeUnit.SECONDS.toSeconds(seconds) % 60
+    return String.format("%02d:%02d:%02d", hour, minute, second)
+}

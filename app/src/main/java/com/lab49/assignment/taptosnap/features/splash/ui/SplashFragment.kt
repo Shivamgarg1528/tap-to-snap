@@ -39,13 +39,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                 .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
                 .collect {
                     when (it) {
-                        SplashViewModel.Events.Empty -> {
+                        SplashViewModel.Events.NoOperation -> {
                             // No-OP
                         }
                         SplashViewModel.Events.Loading -> {
                             binding.progressBar.isVisible = true
                         }
-                        SplashViewModel.Events.NoItemsFound -> {
+                        SplashViewModel.Events.Empty -> {
                             binding.progressBar.isGone = true
                             sharedVM.postMessage(getString(R.string.no_item_found))
                         }

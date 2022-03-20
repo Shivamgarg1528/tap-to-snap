@@ -15,12 +15,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val stateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val snapRepo: SnapRepo,
 ) : ViewModel() {
 
-    private var items: String = stateHandle.get<String>(Constants.KEY.ITEMS).orEmpty()
-    private val _events = MutableStateFlow<Events>(Events.Empty)
+    private var items: String = savedStateHandle.get<String>(Constants.KEY.ITEMS).orEmpty()
+    private val _events = MutableStateFlow<Events>(Events.NoOperation)
     val events = _events.asStateFlow()
 
     /**
@@ -39,11 +39,11 @@ class SplashViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     if (eachEvent.result.isEmpty()) {
-                        _events.value = Events.NoItemsFound
+                        _events.value = Events.Empty
                     } else {
                         eachEvent.result.joinToString { it.name }.also {
                             items = it
-                            stateHandle.set(Constants.KEY.ITEMS, items)
+                            savedStateHandle.set(Constants.KEY.ITEMS, items)
                             _events.value = Events.Success(items = items)
                         }
                     }
@@ -56,9 +56,9 @@ class SplashViewModel @Inject constructor(
     }
 
     sealed class Events {
+        object NoOperation : Events()
         object Empty : Events()
         object Loading : Events()
-        object NoItemsFound : Events()
         data class Failed(val exception: Throwable) : Events()
         data class Success(val items: String) : Events()
     }
