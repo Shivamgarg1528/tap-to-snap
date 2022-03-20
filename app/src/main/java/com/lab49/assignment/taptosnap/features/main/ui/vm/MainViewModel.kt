@@ -52,6 +52,18 @@ class MainViewModel @Inject constructor(
         }
     }
 
+
+    /**
+     * Check recreation
+     *
+     */
+    fun checkRecreation() {
+        if (timerJob?.isActive == false) {
+            sendEvent(Events.Timer(time = "00:00:00"))
+        }
+        sendEvent(Events.Items(itemsList))
+    }
+
     /**
      * Restart the game
      *

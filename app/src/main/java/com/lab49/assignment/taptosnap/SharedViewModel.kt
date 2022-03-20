@@ -1,5 +1,6 @@
 package com.lab49.assignment.taptosnap
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,5 +22,11 @@ class SharedViewModel @Inject constructor() : ViewModel() {
      */
     fun postMessage(message: String) {
         viewModelScope.launch { _messageQueue.send(message) }
+    }
+
+    fun log(message: String) {
+        if (BuildConfig.DEBUG) {
+            Log.d("TTS", "log() called with: message = $message")
+        }
     }
 }

@@ -21,7 +21,8 @@ import com.lab49.assignment.taptosnap.features.main.ui.vm.MainViewModel
 import com.lab49.assignment.taptosnap.util.Constants.SWW
 import com.lab49.assignment.taptosnap.util.toDp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -45,6 +46,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //0- check data if recreated
+        if (savedInstanceState != null) {
+            mainVM.checkRecreation()
+        }
         //1- setup adapter
         val itemsAdapter = ItemsAdapter { tappedItem ->
             try {
@@ -72,8 +77,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         //3- observe events
         viewLifecycleOwner.lifecycleScope.launch {
             mainVM.events
-                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.CREATED)
-                .collectLatest {
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+                .onEach { sharedVM.log("event -> $it") }
+                .collect {
                     when (it) {
                         is MainViewModel.Events.Items -> {
                             itemsAdapter.submitList(it.items)
