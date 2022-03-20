@@ -4,7 +4,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withTimeout
 import retrofit2.Response
-import java.lang.IllegalStateException
 
 inline fun <reified ResponseType> networkCall(
     timeout: Long = 10000,

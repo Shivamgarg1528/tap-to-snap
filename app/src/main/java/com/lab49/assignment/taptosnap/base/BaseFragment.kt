@@ -47,7 +47,7 @@ abstract class BaseFragment<T : ViewBinding>(id: Int) : Fragment(id) {
         positiveBtnText: String,
         negativeBtnText: String? = null,
         positiveBtnAction: (() -> Unit)? = null,
-        negativeBtnAction: (() -> Unit)? = null
+        negativeBtnAction: (() -> Unit)? = null,
     ) {
         val builder = AlertDialog.Builder(context)
             .setTitle(title)
