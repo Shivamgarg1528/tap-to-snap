@@ -4,16 +4,16 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor() : ViewModel() {
 
-    private val _messageQueue = Channel<String>()
-    val messageQueue = _messageQueue.receiveAsFlow()
+    private val _messageQueue = MutableSharedFlow<String>()
+    val messageQueue = _messageQueue.asSharedFlow()
 
     /**
      * this method being used to display different notifications to user via Snackbar for now
@@ -21,7 +21,7 @@ class SharedViewModel @Inject constructor() : ViewModel() {
      * @param message
      */
     fun postMessage(message: String) {
-        viewModelScope.launch { _messageQueue.send(message) }
+        viewModelScope.launch { _messageQueue.emit(message) }
     }
 
     fun log(message: String) {
