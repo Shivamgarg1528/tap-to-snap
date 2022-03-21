@@ -1,4 +1,4 @@
-package com.lab49.assignment.taptosnap.features.main.ui.vm
+package com.lab49.assignment.taptosnap.features.main.vm
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test

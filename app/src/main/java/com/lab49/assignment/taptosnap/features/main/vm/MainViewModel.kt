@@ -1,4 +1,4 @@
-package com.lab49.assignment.taptosnap.features.main.ui.vm
+package com.lab49.assignment.taptosnap.features.main.vm
 
 import android.graphics.Bitmap
 import androidx.lifecycle.SavedStateHandle

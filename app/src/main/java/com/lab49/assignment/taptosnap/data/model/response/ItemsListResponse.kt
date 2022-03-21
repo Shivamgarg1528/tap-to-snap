@@ -1,11 +1,9 @@
 package com.lab49.assignment.taptosnap.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
 
+@Keep
 class ItemsListResponse : ArrayList<ItemsListResponse.Item>() {
-
-    data class Item(
-        @SerializedName("name")
-        val name: String,
-    )
+    @Keep
+    data class Item(val name: String)
 }

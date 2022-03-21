@@ -1,18 +1,39 @@
 ext {
 
     versions = [
-            retrofit     : "2.9.0",
-            navController: "2.4.1",
-            coroutines   : "1.3.0",
-            coreKtx      : "1.7.0",
-            appCompat    : "1.4.1",
+            retrofit        : "2.9.0",
+            navController   : "2.4.1",
+            coroutines      : "1.3.0",
+            coreKtx         : "1.7.0",
+            appCompat       : "1.4.1",
+            gsonConvertor   : "2.9.0",
+            interceptor     : "4.8.1",
+            constraintlayout: "2.1.3",
+            lifecycleRuntime: "2.4.1",
+            hilt            : "2.41",
+            material        : "1.5.0",
+            junit4          : "4.13.2",
+            turbine         : "0.7.0",
+            coroutineTest   : "1.6.0",
+            mockito         : "4.4.0"
     ]
 
     libraries = [
-            navKtx   : "androidx.navigation:navigation-fragment-ktx:${versions.navController}",
-            navUi    : "androidx.navigation:navigation-ui:${versions.navController}",
-            coreKtx  : "androidx.core:core-ktx:${versions.coreKtx}",
-            retrofit : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-            appCompat: "androidx.appcompat:appcompat:${versions.appCompat}",
+            navKtx          : "androidx.navigation:navigation-fragment-ktx:${versions.navController}",
+            navUi           : "androidx.navigation:navigation-ui:${versions.navController}",
+            coreKtx         : "androidx.core:core-ktx:${versions.coreKtx}",
+            retrofit        : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+            appCompat       : "androidx.appcompat:appcompat:${versions.appCompat}",
+            gsonConvertor   : "com.squareup.retrofit2:converter-gson:${versions.gsonConvertor}",
+            interceptor     : "com.squareup.okhttp3:logging-interceptor:${versions.interceptor}",
+            constraintlayout: "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}",
+            lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleRuntime}",
+            hilt            : "com.google.dagger:hilt-android:${versions.hilt}",
+            hiltKapt        : "com.google.dagger:hilt-compiler:${versions.hilt}",
+            material        : "com.google.android.material:material:${versions.material}",
+            junit4          : "junit:junit:${versions.junit4}",
+            turbine         : "app.cash.turbine:turbine:${versions.turbine}",
+            coroutineTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutineTest}",
+            mockito         : "org.mockito:mockito-core:${versions.mockito}",
     ]
 }

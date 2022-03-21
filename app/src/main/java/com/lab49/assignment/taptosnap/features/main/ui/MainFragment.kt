@@ -17,7 +17,7 @@ import com.lab49.assignment.taptosnap.R
 import com.lab49.assignment.taptosnap.base.BaseFragment
 import com.lab49.assignment.taptosnap.databinding.FragmentMainBinding
 import com.lab49.assignment.taptosnap.features.main.adapter.ItemsAdapter
-import com.lab49.assignment.taptosnap.features.main.ui.vm.MainViewModel
+import com.lab49.assignment.taptosnap.features.main.vm.MainViewModel
 import com.lab49.assignment.taptosnap.util.Constants.SWW
 import com.lab49.assignment.taptosnap.util.toDp
 import dagger.hilt.android.AndroidEntryPoint
