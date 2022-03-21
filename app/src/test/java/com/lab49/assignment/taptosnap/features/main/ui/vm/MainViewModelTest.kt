@@ -1,6 +1,5 @@
 package com.lab49.assignment.taptosnap.features.main.ui.vm
 
-import android.graphics.Bitmap
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.lab49.assignment.taptosnap.BaseTest
@@ -30,12 +29,6 @@ class MainViewModelTest : BaseTest() {
 
     @Mock
     private lateinit var savedStateHandle: SavedStateHandle
-
-    @Mock
-    private lateinit var bitmap: Bitmap
-
-    @Mock
-    private lateinit var itemPostRequest: ItemPostRequest
 
     @Test
     fun `should emit empty when items is empty`() {
