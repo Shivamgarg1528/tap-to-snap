@@ -12,6 +12,7 @@
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_54">54dp</dimen>
     <dimen name="dp_83">83dp</dimen>
+    <dimen name="dp_175">175dp</dimen>
     <dimen name="dp_210">210dp</dimen>
     <!--    Sps  -->
     <dimen name="sp_14">14sp</dimen>

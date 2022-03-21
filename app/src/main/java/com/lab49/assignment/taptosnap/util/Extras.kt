@@ -1,8 +1,11 @@
 package com.lab49.assignment.taptosnap.util
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.util.Base64
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.Keep
 import com.lab49.assignment.taptosnap.util.Constants.SWW
 import java.io.ByteArrayOutputStream
@@ -27,6 +30,19 @@ fun Bitmap.toBase64String(): String {
         compress(Bitmap.CompressFormat.JPEG, 100, this)
         return Base64.encodeToString(toByteArray(), Base64.DEFAULT)
     }
+}
+
+fun View.topMargin(margin: Int) {
+    (layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin = margin
+}
+
+fun Context.getStatusBarHeight(): Int {
+    var result = 0
+    val resourceId: Int = resources.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId > 0) {
+        result = resources.getDimensionPixelSize(resourceId)
+    }
+    return result
 }
 
 val Int.toDp: Int

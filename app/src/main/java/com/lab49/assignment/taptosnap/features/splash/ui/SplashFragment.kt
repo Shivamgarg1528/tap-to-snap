@@ -15,10 +15,8 @@ import com.lab49.assignment.taptosnap.R
 import com.lab49.assignment.taptosnap.base.BaseFragment
 import com.lab49.assignment.taptosnap.databinding.FragmentSplashBinding
 import com.lab49.assignment.taptosnap.features.splash.vm.SplashViewModel
-import com.lab49.assignment.taptosnap.util.Constants
-import com.lab49.assignment.taptosnap.util.getMessageForUi
+import com.lab49.assignment.taptosnap.util.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -30,6 +28,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //0- logo padding
+        val top = 175.toDp - requireContext().getStatusBarHeight()
+        binding.logo.topMargin(top)
         //1- setup click listener
         binding.btnLetsGo.setOnClickListener { splashVM.getItems() }
 
