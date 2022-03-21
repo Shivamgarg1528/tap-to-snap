@@ -1,6 +1,6 @@
 package com.lab49.assignment.taptosnap.data.repo
 
-import com.lab49.assignment.taptosnap.data.model.request.ItemRequest
+import com.lab49.assignment.taptosnap.data.model.request.ItemPostRequest
 import com.lab49.assignment.taptosnap.data.model.response.ItemPostResponse
 import com.lab49.assignment.taptosnap.data.model.response.ItemsListResponse
 import com.lab49.assignment.taptosnap.data.repo.server.AppService
@@ -15,7 +15,7 @@ class SnapRepoImpl @Inject constructor(private val apiService: AppService) : Sna
         return networkCall { apiService.getItems() }
     }
 
-    override fun uploadItem(request: ItemRequest): Flow<Resource<ItemPostResponse>> {
-        return networkCall { apiService.uploadItem(request) }
+    override fun uploadItem(itemPostRequest: ItemPostRequest): Flow<Resource<ItemPostResponse>> {
+        return networkCall { apiService.uploadItem(itemPostRequest) }
     }
 }

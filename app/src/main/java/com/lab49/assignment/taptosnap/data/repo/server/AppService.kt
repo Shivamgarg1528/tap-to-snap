@@ -1,6 +1,6 @@
 package com.lab49.assignment.taptosnap.data.repo.server
 
-import com.lab49.assignment.taptosnap.data.model.request.ItemRequest
+import com.lab49.assignment.taptosnap.data.model.request.ItemPostRequest
 import com.lab49.assignment.taptosnap.data.model.response.ItemPostResponse
 import com.lab49.assignment.taptosnap.data.model.response.ItemsListResponse
 import retrofit2.Response
@@ -13,5 +13,5 @@ interface AppService {
     suspend fun getItems(): Response<ItemsListResponse>
 
     @POST("item/image")
-    suspend fun uploadItem(@Body request: ItemRequest): Response<ItemPostResponse>
+    suspend fun uploadItem(@Body itemPostRequest: ItemPostRequest): Response<ItemPostResponse>
 }

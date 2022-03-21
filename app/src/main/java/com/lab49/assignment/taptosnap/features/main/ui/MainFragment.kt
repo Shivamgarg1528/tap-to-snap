@@ -81,13 +81,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 .onEach { sharedVM.log("event -> $it") }
                 .collect {
                     when (it) {
-                        is MainViewModel.Events.Items -> {
+                        is MainViewModel.Event.Items -> {
                             itemsAdapter.submitList(it.items)
                         }
-                        is MainViewModel.Events.Timer -> {
+                        is MainViewModel.Event.Timer -> {
                             binding.tvTimer.text = it.time
                         }
-                        MainViewModel.Events.Lost -> {
+                        MainViewModel.Event.Lost -> {
                             showAlert(context = requireContext(),
                                 title = getString(R.string.game_over),
                                 message = getString(R.string.better_luck),
@@ -97,7 +97,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                                 negativeBtnAction = { mainVM.exit() }
                             )
                         }
-                        MainViewModel.Events.Won -> {
+                        MainViewModel.Event.Won -> {
                             showAlert(context = requireContext(),
                                 title = getString(R.string.nice_job),
                                 message = getString(R.string.game_won),
@@ -107,13 +107,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                                 negativeBtnAction = { mainVM.exit() }
                             )
                         }
-                        MainViewModel.Events.Empty -> {
+                        MainViewModel.Event.Empty -> {
                             findNavController().navigate(R.id.action_main_fragment_to_splash_fragment)
                         }
-                        MainViewModel.Events.Exit -> {
+                        MainViewModel.Event.Exit -> {
                             requireActivity().finish()
                         }
-                        is MainViewModel.Events.Message -> {
+                        is MainViewModel.Event.Message -> {
                             sharedVM.postMessage(it.message)
                         }
                     }

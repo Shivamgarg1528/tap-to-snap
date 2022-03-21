@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lab49.assignment.taptosnap.data.model.request.ItemRequest
+import com.lab49.assignment.taptosnap.data.model.request.ItemPostRequest
 import com.lab49.assignment.taptosnap.data.model.request.local.ItemWrapper
 import com.lab49.assignment.taptosnap.data.repo.SnapRepo
 import com.lab49.assignment.taptosnap.util.Constants
@@ -37,17 +37,17 @@ class MainViewModel @Inject constructor(
     private val allSnapCaptured: Boolean
         get() = itemsList.size > 0 && itemsList.size == itemsList.count { it.state == Constants.STATE.SUCCESS }
 
-    private val _events = Channel<Events>(capacity = Channel.UNLIMITED)
+    private val _events = Channel<Event>(capacity = Channel.UNLIMITED)
     val events = _events.receiveAsFlow()
 
     init {
         if (items.isEmpty()) {
-            sendEvent(Events.Empty)
+            sendEvent(Event.Empty)
         } else {
             itemsList = items.split(",")
                 .map { ItemWrapper(it) }
                 .toMutableList()
-            sendEvent(Events.Items(itemsList))
+            sendEvent(Event.Items(itemsList))
             startTimer()
         }
     }
@@ -59,9 +59,9 @@ class MainViewModel @Inject constructor(
      */
     fun checkRecreation() {
         if (timerJob?.isActive == false) {
-            sendEvent(Events.Timer(time = "00:00:00"))
+            sendEvent(Event.Timer(time = "00:00:00"))
         }
-        sendEvent(Events.Items(itemsList))
+        sendEvent(Event.Items(itemsList))
     }
 
     /**
@@ -74,7 +74,7 @@ class MainViewModel @Inject constructor(
             newList[index] = wrapper.copy(state = Constants.STATE.NOT_STARTED, bitmap = null)
         }
         itemsList = newList
-        sendEvent(Events.Items(itemsList))
+        sendEvent(Event.Items(itemsList))
         startTimer()
     }
 
@@ -83,7 +83,7 @@ class MainViewModel @Inject constructor(
      *
      */
     fun exit() {
-        sendEvent(Events.Exit)
+        sendEvent(Event.Exit)
     }
 
     /**
@@ -106,31 +106,31 @@ class MainViewModel @Inject constructor(
             || lastTappedItem == null
             || !updateImage(lastTappedItem.itemName, bitmap)
         ) {
-            sendEvent(Events.Message(Constants.FTG))
+            sendEvent(Event.Message(Constants.FTG))
         } else {
-            val request = ItemRequest(lastTappedItem.itemName, bitmap.toBase64String())
-            postImage(request = request)
+            val request = ItemPostRequest(lastTappedItem.itemName, bitmap.toBase64String())
+            postImage(itemPostRequest = request)
         }
     }
 
     /**
      * this function will try to upload the image for verification
      *
-     * @param request
+     * @param itemPostRequest
      */
-    private fun postImage(request: ItemRequest) {
-        snapRepo.uploadItem(request)
+    fun postImage(itemPostRequest: ItemPostRequest) {
+        snapRepo.uploadItem(itemPostRequest)
             .onEach {
                 when (it) {
                     is Resource.Loading -> {
                         updateState(
-                            name = request.imageLabel,
+                            name = itemPostRequest.imageLabel,
                             state = Constants.STATE.RUNNING
                         )
                     }
                     is Resource.Failure -> {
                         updateState(
-                            name = request.imageLabel,
+                            name = itemPostRequest.imageLabel,
                             state = Constants.STATE.FAILED
                         )
                     }
@@ -140,12 +140,12 @@ class MainViewModel @Inject constructor(
                             state = Constants.STATE.SUCCESS
                         }
                         updateState(
-                            name = request.imageLabel,
+                            name = itemPostRequest.imageLabel,
                             state = state,
                         )
                     }
                 }
-                sendEvent(Events.Items(itemsList))
+                sendEvent(Event.Items(itemsList))
             }.launchIn(viewModelScope)
     }
 
@@ -154,7 +154,7 @@ class MainViewModel @Inject constructor(
      *
      * @param event
      */
-    private fun sendEvent(event: Events) {
+    private fun sendEvent(event: Event) {
         viewModelScope.launch { _events.send(event) }
     }
 
@@ -210,26 +210,26 @@ class MainViewModel @Inject constructor(
         timerJob = viewModelScope.launch {
             var timerInSeconds = Constants.MAX_TIMER_IN_SECONDS
             while (timerInSeconds > 0 && isActive && !allSnapCaptured) {
-                _events.send(Events.Timer(time = convertSecondsToDateUiFormat(timerInSeconds)))
+                _events.send(Event.Timer(time = convertSecondsToDateUiFormat(timerInSeconds)))
                 timerInSeconds -= 1
                 delay(1000)
             }
             if (allSnapCaptured) {
-                _events.send(Events.Won)
+                _events.send(Event.Won)
             } else if (timerInSeconds <= 0) {
-                _events.send(Events.Timer(time = "00:00:00"))
-                _events.send(Events.Lost)
+                _events.send(Event.Timer(time = "00:00:00"))
+                _events.send(Event.Lost)
             }
         }
     }
 
-    sealed class Events {
-        object Exit : Events()
-        object Won : Events()
-        object Lost : Events()
-        object Empty : Events()
-        data class Message(val message: String) : Events()
-        data class Timer(val time: String) : Events()
-        data class Items(val items: List<ItemWrapper>) : Events()
+    sealed class Event {
+        object Exit : Event()
+        object Won : Event()
+        object Lost : Event()
+        object Empty : Event()
+        data class Message(val message: String) : Event()
+        data class Timer(val time: String) : Event()
+        data class Items(val items: List<ItemWrapper>) : Event()
     }
 }
