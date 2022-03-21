@@ -56,28 +56,28 @@ class ItemsAdapter(private val callback: (ItemWrapper) -> Unit) :
         private fun notStarted() {
             binding.parent.setBackgroundResource(R.drawable.state_loading)
             binding.tvTryAgain.isGone = true
-            binding.progressBar.isGone = true
+            binding.progressLayout.progressBar.isGone = true
             binding.ivCamera.isVisible = true
         }
 
         private fun running() {
             binding.parent.setBackgroundResource(R.drawable.state_loading)
             binding.tvTryAgain.isGone = true
-            binding.progressBar.isVisible = true
+            binding.progressLayout.progressBar.isVisible = true
             binding.ivCamera.isGone = true
         }
 
         private fun failed() {
             binding.parent.setBackgroundResource(R.drawable.state_failed)
             binding.tvTryAgain.isVisible = true
-            binding.progressBar.isGone = true
+            binding.progressLayout.progressBar.isGone = true
             binding.ivCamera.isGone = true
         }
 
         private fun success() {
             binding.parent.setBackgroundResource(R.drawable.state_success)
             binding.tvTryAgain.isGone = true
-            binding.progressBar.isGone = true
+            binding.progressLayout.progressBar.isGone = true
             binding.ivCamera.isGone = true
         }
     }

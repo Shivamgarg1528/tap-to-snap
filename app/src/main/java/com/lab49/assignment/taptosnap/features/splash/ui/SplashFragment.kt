@@ -43,18 +43,18 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                             // No-OP
                         }
                         SplashViewModel.Event.Loading -> {
-                            binding.progressBar.isVisible = true
+                            binding.progressLayout.progressBar.isVisible = true
                         }
                         SplashViewModel.Event.Empty -> {
-                            binding.progressBar.isGone = true
+                            binding.progressLayout.progressBar.isGone = true
                             sharedVM.postMessage(getString(R.string.no_item_found))
                         }
                         is SplashViewModel.Event.Failed -> {
-                            binding.progressBar.isGone = true
+                            binding.progressLayout.progressBar.isGone = true
                             sharedVM.postMessage(it.exception.getMessageForUi())
                         }
                         is SplashViewModel.Event.Success -> {
-                            binding.progressBar.isGone = true
+                            binding.progressLayout.progressBar.isGone = true
                             findNavController().navigate(
                                 resId = R.id.action_splash_fragment_to_main_fragment,
                                 args = bundleOf(Constants.KEY.ITEMS to it.items)

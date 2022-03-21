@@ -46,24 +46,15 @@
                 app:layout_constraintVertical_bias="1.0"
                 tools:text="Mug" />
 
-            <FrameLayout
-                android:id="@+id/progress_bar"
+            <include
+                android:id="@+id/progress_layout"
+                layout="@layout/progress_layout"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_0"
-                android:background="@color/bg_gray_dark_70"
-                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/tv_image_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ProgressBar
-                    android:layout_width="@dimen/dp_25"
-                    android:layout_height="@dimen/dp_25"
-                    android:layout_gravity="center"
-                    android:indeterminateTint="@color/white"
-                    android:indeterminateTintMode="src_in" />
-            </FrameLayout>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_try_again"
