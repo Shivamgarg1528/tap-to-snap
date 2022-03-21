@@ -18,6 +18,7 @@ import com.lab49.assignment.taptosnap.features.splash.vm.SplashViewModel
 import com.lab49.assignment.taptosnap.util.Constants
 import com.lab49.assignment.taptosnap.util.getMessageForUi
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
