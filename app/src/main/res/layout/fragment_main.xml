@@ -7,23 +7,29 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tap_to_snap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_50"
         android:gravity="center"
         android:text="@string/tap_to_snap"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_28"
         android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_items"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0"
-        android:layout_marginHorizontal="@dimen/dp_4"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:padding="@dimen/dp_8" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dp_4"
+            android:clipToPadding="false"
+            android:padding="@dimen/dp_8" />
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_timer"

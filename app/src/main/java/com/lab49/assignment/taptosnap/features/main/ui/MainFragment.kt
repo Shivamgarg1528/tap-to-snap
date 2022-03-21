@@ -19,7 +19,9 @@ import com.lab49.assignment.taptosnap.databinding.FragmentMainBinding
 import com.lab49.assignment.taptosnap.features.main.adapter.ItemsAdapter
 import com.lab49.assignment.taptosnap.features.main.vm.MainViewModel
 import com.lab49.assignment.taptosnap.util.Constants.SWW
+import com.lab49.assignment.taptosnap.util.getStatusBarHeight
 import com.lab49.assignment.taptosnap.util.toDp
+import com.lab49.assignment.taptosnap.util.topMargin
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -50,7 +52,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         if (savedInstanceState != null) {
             mainVM.checkRecreation()
         }
-        //1- setup adapter
+        //1- setup adapter + margining
+        binding.tvTapToSnap.topMargin(76.toDp - requireContext().getStatusBarHeight())
         val itemsAdapter = ItemsAdapter { tappedItem ->
             try {
                 mainVM.cacheTappedItem(tappedItem)

@@ -17,6 +17,7 @@ import com.lab49.assignment.taptosnap.databinding.FragmentSplashBinding
 import com.lab49.assignment.taptosnap.features.splash.vm.SplashViewModel
 import com.lab49.assignment.taptosnap.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
