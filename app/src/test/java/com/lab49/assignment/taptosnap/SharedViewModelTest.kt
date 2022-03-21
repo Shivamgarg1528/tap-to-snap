@@ -2,7 +2,7 @@ package com.lab49.assignment.taptosnap
 
 import app.cash.turbine.test
 import com.lab49.assignment.taptosnap.util.Constants
-import junit.framework.Assert.assertEquals
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
