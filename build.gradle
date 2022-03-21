@@ -15,3 +15,16 @@ apply from: 'dependencies.gradle'
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+import org.apache.tools.ant.taskdefs.condition.Os
+task cleanSubmission(type: Delete) {
+    def toExclude = []
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        toExclude = ['**/gradle-wrapper.jar', '**/gradlew.bat'] }
+    def cleanTree = fileTree(dir:project.rootDir, excludes: toExclude, includes:[ '**/*.ade', '**/*.adp', '**/*.apk', '**/*.appx', '**/*.appxbundle', '**/*.bat', '**/*.cab', '**/*.chm', '**/*.cmd', '**/*.com', '**/*.cpl', '**/*.dll', '**/*.dmg', '**/*.ex', '**/*.ex_', '**/*.exe', '**/*.hta', '**/*.ins', '**/*.isp', '**/*.iso', '**/*.jar', '**/*.js', '**/*.jse', '**/*.lib', '**/*.lnk', '**/*.mde', '**/*.msc', '**/*.msi', '**/*.msix', '**/*.msixbundle', '**/*.msp', '**/*.mst', '**/*.nsh', '**/*.pif', '**/*.ps1', '**/*.scr', '**/*.sct', '**/*.shb', '**/*.sys', '**/*.vb', '**/*.vbe', '**/*.vbs', '**/*.vxd', '**/*.wsc', '**/*.wsf', '**/*.wsh'
+    ])
+    delete cleanTree
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        println "You will need to manually remove the gradle-wrapper.jar and gradlew.bat files before creating your submission archive."
+    }
+}
